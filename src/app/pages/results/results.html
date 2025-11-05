@@ -18,6 +18,25 @@
             <p><span class="label">Teléfono:</span> {{ f.telefono }}</p>
             <p><span class="label">Email:</span> {{ f.email }}</p>
             <p><span class="label">Interés:</span> {{ f.interes }}</p>
+
+            <!-- Bloque de feedback -->
+            @if(f.feedback){
+              <div class="mt-3 border-t pt-3">
+                <p class="font-semibold text-primary">Feedback:</p>
+                <div class="flex items-center space-x-1">
+                  @for (i of [1,2,3,4,5]; track i) {
+                    <span class="text-xl"
+                          [class.text-yellow-400]="i <= f.feedback.estrellas"
+                          [class.text-gray-300]="i > f.feedback.estrellas">
+                      ★
+                    </span>
+                  }
+                </div>
+                @if(f.feedback.comentario){
+                  <p class="text-gray-700 mt-2 italic">"{{ f.feedback.comentario }}"</p>
+                }
+              </div>
+            }
           </li>
         }
       </ul>

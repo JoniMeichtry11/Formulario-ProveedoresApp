@@ -8,6 +8,10 @@ interface Formulario {
   telefono: string;
   email: string;
   interes: string;
+  feedback: {
+    comentario: string;
+    estrellas: number;
+  }
 }
 
 @Component({
