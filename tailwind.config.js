@@ -9,9 +9,10 @@ module.exports = {
         primary: "var(--color-primary)",
         secondary: "var(--color-secondary)",
         accent: "var(--color-accent)",
-        neutral: "var(--color-neutral)"
+        neutral: "var(--color-neutral)",
+        text: "var(--color-text)"
       }
-    },
+    }
   },
   plugins: [],
 }
