@@ -6,7 +6,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "site": "formulario-proveedores-app",
+    "site": "cenefa-formulario",
     "public": "dist/form-mati/browser",
     "ignore": [
       "firebase.json",
