@@ -5,13 +5,14 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './form.html',
   styleUrl: './form.scss',
 })
-export class Form implements OnInit{
-  loading = false;
-  success = false;
+export class Form implements OnInit {
+  loading = signal(false);
+  success = signal(false);
 
   form!: FormGroup;
 
@@ -27,17 +28,20 @@ export class Form implements OnInit{
     });
   }
 
-async onSubmit() {
-  if (this.form.invalid) return;
+  async onSubmit() {
+    if (this.form.invalid) return;
 
-  try {
-    const ref = collection(this.firestore, 'formularios');
-    const docRef = await addDoc(ref, this.form.value);
+    this.loading.set(true);
+    try {
+      const ref = collection(this.firestore, 'formularios');
+      const docRef = await addDoc(ref, this.form.value);
 
-    // docRef.id es el ID del nuevo documento
-    this.router.navigate(['/gracias', docRef.id]);
-  } catch (error) {
-    console.error('Error al guardar el formulario', error);
+      this.success.set(true);
+      this.router.navigate(['/gracias', docRef.id]);
+    } catch (error) {
+      console.error('Error al guardar el formulario', error);
+    } finally {
+      this.loading.set(false);
+    }
   }
-}
 }
