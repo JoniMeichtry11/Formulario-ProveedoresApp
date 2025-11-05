@@ -4,20 +4,20 @@
   @if (loading()) {
     <div class="loader-container">
       <div class="loader"></div>
-      <p class="mt-2 text-gray-300">Cargando resultados...</p>
+      <p class="mt-2 text-primary">Cargando resultados...</p>
     </div>
   } @else {
     @if (formularios().length === 0) {
       <p class="text-gray-500 text-center mt-6">No hay registros aún.</p>
     } @else {
-      <ul class="space-y-4 mt-6">
+      <ul class="space-y-4 mt-6 text-dark">
         @for (f of formularios(); track f.nombre) {
           <li class="card animate-fadeIn">
             <h2 class="font-bold text-primary">{{ f.nombre }}</h2>
-            <p><span class="label">Empresa:</span> {{ f.empresa }}</p>
-            <p><span class="label">Teléfono:</span> {{ f.telefono }}</p>
-            <p><span class="label">Email:</span> {{ f.email }}</p>
-            <p><span class="label">Interés:</span> {{ f.interes }}</p>
+            <p class="text-primary"><span class="label">Empresa:</span> {{ f.empresa }}</p>
+            <p class="text-primary"><span class="label">Teléfono:</span> {{ f.telefono }}</p>
+            <p class="text-primary"><span class="label">Email:</span> {{ f.email }}</p>
+            <p class="text-primary"><span class="label">Interés:</span> {{ f.interes }}</p>
 
             <!-- Bloque de feedback -->
             @if(f.feedback){
