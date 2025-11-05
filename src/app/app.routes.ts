@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { Form } from './pages/form/form';
 import { Results } from './pages/results/results';
+import { Gracias } from './pages/gracias/gracias';
 
 export const routes: Routes = [
   {
@@ -8,5 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'results/:ver-resultados', component: Results
-  }
+  },
+  { path: 'gracias', component: Gracias},
+  { path: '**', redirectTo: '' }
 ];

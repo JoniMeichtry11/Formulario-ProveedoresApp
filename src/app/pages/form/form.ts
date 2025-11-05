@@ -1,6 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { addDoc, collection, Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -14,7 +15,7 @@ export class Form implements OnInit{
 
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private firestore: Firestore) {}
+  constructor(private fb: FormBuilder, private firestore: Firestore, private router: Router) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -27,15 +28,16 @@ export class Form implements OnInit{
   }
 
   async onSubmit() {
-    if (this.form.invalid) return;
-      console.log("form", this.form.value);
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
     this.loading = true;
     try {
       const ref = collection(this.firestore, 'formularios');
       await addDoc(ref, this.form.value);
-      this.success = true;
-      this.form.reset();
+      this.router.navigate(['/gracias']); // redirige a otra ruta
     } catch (err) {
       console.error('Error al guardar en Firestore', err);
     } finally {
