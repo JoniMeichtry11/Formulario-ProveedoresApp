@@ -1,0 +1,64 @@
+<div class="form-card">
+  <h1 class="text-2xl font-bold text-primary mb-6 text-center">
+    Encuentra tu proveedor
+  </h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Nombre -->
+    <input formControlName="nombre" type="text" placeholder="Nombre" class="input" />
+
+    @if (form.get('nombre')?.touched && form.get('nombre')?.invalid) {
+      <div class="bg-red-100 text-red-700 mt-2 rounded px-3 py-2 text-sm">
+        Ingresá tu nombre por favor
+      </div>
+    }
+
+    <!-- Empresa -->
+    <input formControlName="empresa" type="text" placeholder="Empresa" class="input" />
+
+    @if (form.get('empresa')?.touched && form.get('empresa')?.invalid) {
+      <div class="bg-red-100 text-red-700 mt-2 rounded px-3 py-2 text-sm">
+        Ingresá el nombre de la empresa
+      </div>
+    }
+
+    <!-- Teléfono -->
+    <input formControlName="telefono" type="tel" placeholder="Teléfono" class="input" />
+
+    @if (form.get('telefono')?.touched && form.get('telefono')?.invalid) {
+      <div class="bg-red-100 text-red-700 mt-2 rounded px-3 py-2 text-sm">
+        Ingresá un teléfono válido
+      </div>
+    }
+
+    <!-- Email -->
+    <input formControlName="email" type="email" placeholder="Email" class="input" />
+
+    @if (form.get('email')?.touched && form.get('email')?.invalid) {
+      <div class="bg-red-100 text-red-700 mt-2 rounded px-3 py-2 text-sm">
+        Ingresá un email válido
+      </div>
+    }
+
+    <!-- Interés -->
+    <input formControlName="interes" type="text" placeholder="Interés" class="input" />
+
+    @if (form.get('interes')?.touched && form.get('interes')?.invalid) {
+      <div class="bg-red-100 text-red-700 mt-2 rounded px-3 py-2 text-sm">
+        Ingresá tu interés
+      </div>
+    }
+
+    <!-- Botón -->
+    <button type="submit" class="btn-primary w-full" [disabled]="loading">
+      {{ loading ? 'Enviando...' : 'Enviar' }}
+    </button>
+  </form>
+
+
+  @if(success){
+    <p class="text-green-600 mt-4 text-center animate-bounce">
+      ¡Datos enviados con éxito!
+    </p>
+  }
+</div>
