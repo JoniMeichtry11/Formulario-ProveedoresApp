@@ -10,6 +10,6 @@ export const routes: Routes = [
   {
     path: 'results/:ver-resultados', component: Results
   },
-  { path: 'gracias', component: Gracias},
+  { path: 'gracias/:id', component: Gracias },
   { path: '**', redirectTo: '' }
 ];

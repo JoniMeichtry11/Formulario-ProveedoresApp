@@ -27,21 +27,17 @@ export class Form implements OnInit{
     });
   }
 
-  async onSubmit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
+async onSubmit() {
+  if (this.form.invalid) return;
 
-    this.loading = true;
-    try {
-      const ref = collection(this.firestore, 'formularios');
-      await addDoc(ref, this.form.value);
-      this.router.navigate(['/gracias']); // redirige a otra ruta
-    } catch (err) {
-      console.error('Error al guardar en Firestore', err);
-    } finally {
-      this.loading = false;
-    }
+  try {
+    const ref = collection(this.firestore, 'formularios');
+    const docRef = await addDoc(ref, this.form.value);
+
+    // docRef.id es el ID del nuevo documento
+    this.router.navigate(['/gracias', docRef.id]);
+  } catch (error) {
+    console.error('Error al guardar el formulario', error);
   }
+}
 }

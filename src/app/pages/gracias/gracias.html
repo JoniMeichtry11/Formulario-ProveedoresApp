@@ -1,10 +1,60 @@
-<div class="gracias-container">
-  <div class="card animate-scaleUp">
-    <div class="icon animate-bounceIn">✔</div>
-    <h1 class="title">¡Gracias!</h1>
-    <p class="message">Tus datos fueron enviados con éxito.</p>
-    <button routerLink="/" class="btn-primary mt-6 w-full">
-      Volver al inicio
+<div class="flex flex-col items-center justify-center min-h-screen bg-neutral">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md text-center">
+    <h1 class="text-2xl font-bold text-primary mb-4">¡Gracias por tu respuesta!</h1>
+    @if(showEstrellas()){
+    <p class="mb-6 text-gray-600">Dejanos tu valoración:</p>
+
+    <!-- Estrellas -->
+       <div class="flex justify-center space-x-2 mb-4">
+         @for (i of [1,2,3,4,5]; track i) {
+           <button type="button"
+                   (click)="estrellas.set(i)"
+                   class="text-3xl transition-transform duration-200"
+                   [class.text-yellow-400]="i <= estrellas()"
+                   [class.text-gray-300]="i > estrellas()"
+                   [class.scale-125]="i === estrellas()">
+             ★
+           </button>
+         }
+       </div>
+
+       <!-- Comentario -->
+       <textarea [ngModel]="comentario()" (ngModelChange)="comentario.set($event)"
+                 placeholder="Comentario (opcional)"
+                 class="w-full border rounded px-3 py-2 mb-4"></textarea>
+
+                 <!-- Botón feedback -->
+                 <button (click)="enviarFeedback()"
+                 class="bg-primary text-white w-full py-2 rounded hover:bg-secondary flex items-center justify-center"
+                 [disabled]="loading() || enviado()">
+
+                 @if(loading()){
+                   <svg class="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                     <circle class="opacity-25" cx="12" cy="12" r="10"
+                  stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              </svg>
+              Enviando...
+            }
+      @else if(enviado()){
+        ¡Gracias por tu feedback!
+      }
+      @else {
+        Enviar feedback
+      }
     </button>
+
+  } @else {
+    <div class="icon animate-bounceIn">✔</div>
+  }
+    <!-- Botón volver al inicio -->
+    @if(enviado()){
+      <div class="mt-6">
+        <button (click)="volverInicio()" class="underline text-primary hover:text-secondary">
+          Volver al inicio
+        </button>
+      </div>
+    }
   </div>
 </div>
